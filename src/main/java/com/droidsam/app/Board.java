@@ -78,4 +78,8 @@ public class Board {
         }
         return hasPlayerACompleteInverseDiagonal(player);
     }
+
+    public boolean isFull() {
+        return grid.isFull();
+    }
 }

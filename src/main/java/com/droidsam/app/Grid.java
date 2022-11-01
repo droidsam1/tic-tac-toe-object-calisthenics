@@ -6,9 +6,11 @@ import java.util.Map;
 public class Grid {
 
     private final Map<Coordinate, Player> squares;
+    private final int fullSize;
 
     public Grid(int height, int wide) {
-        this.squares = new HashMap<>(height * wide);
+        this.fullSize = height * wide;
+        this.squares = new HashMap<>(fullSize);
     }
 
     public void put(Coordinate position, Player player) {
@@ -21,5 +23,9 @@ public class Grid {
 
     public boolean isEmpty() {
         return squares.isEmpty();
+    }
+
+    public boolean isFull() {
+        return this.squares.size() == fullSize;
     }
 }

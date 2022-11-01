@@ -47,4 +47,8 @@ public class TicTacToeGame {
 
         return NO_PLAYER;
     }
+
+    public boolean isDraw() {
+        return board.isFull() && NO_PLAYER.equals(getWinner());
+    }
 }

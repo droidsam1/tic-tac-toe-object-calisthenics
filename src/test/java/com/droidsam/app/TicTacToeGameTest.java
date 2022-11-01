@@ -124,5 +124,23 @@ public class TicTacToeGameTest {
         game.place(Player.O, Coordinate.of(2, 0));
 
         assertEquals(Player.O, game.getWinner());
+        assertFalse(game.isDraw());
+    }
+
+
+    @Test
+    public void gameIsADrawIfAllSquaresAreFilledAndNeitherPlayerAchievesThreeInARow() {
+        game.place(Player.X, Coordinate.of(0, 0));
+        game.place(Player.O, Coordinate.of(0, 1));
+        game.place(Player.X, Coordinate.of(0, 2));
+        game.place(Player.O, Coordinate.of(1, 0));
+        game.place(Player.X, Coordinate.of(1, 2));
+        game.place(Player.O, Coordinate.of(1, 1));
+        game.place(Player.X, Coordinate.of(2, 1));
+        game.place(Player.O, Coordinate.of(2, 2));
+        game.place(Player.X, Coordinate.of(2, 0));
+
+        assertEquals(Player.NO_PLAYER, game.getWinner());
+        assertTrue(game.isDraw());
     }
 }
