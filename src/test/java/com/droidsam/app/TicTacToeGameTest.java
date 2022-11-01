@@ -67,4 +67,15 @@ public class TicTacToeGameTest {
 
         assertEquals(Player.X, game.getWinner());
     }
+
+    @Test
+    public void aPlayerWithThreeMarksInAnyRowHorizontallyWinsTheGame() {
+        game.place(Player.X, Coordinate.of(1, 0));
+        game.place(Player.Y, Coordinate.of(0, 1));
+        game.place(Player.X, Coordinate.of(1, 1));
+        game.place(Player.Y, Coordinate.of(2, 2));
+        game.place(Player.X, Coordinate.of(1, 2));
+
+        assertEquals(Player.X, game.getWinner());
+    }
 }

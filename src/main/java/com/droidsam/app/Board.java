@@ -21,9 +21,19 @@ public class Board {
     }
 
     public boolean hasPlayerACompleteRow(Player player) {
+        int columnIndex = 0;
+        boolean result = false;
+        while (columnIndex < 3 && !result) {
+            result = hasCompleteRow(player, columnIndex);
+            columnIndex++;
+        }
+        return result;
+    }
+
+    private boolean hasCompleteRow(Player player, int columnIndex) {
         boolean result = true;
         for (int i = 0; i < 3; i++) {
-            result &= player.equals(this.grid.get(Coordinate.of(0, i)));
+            result &= player.equals(this.grid.get(Coordinate.of(columnIndex, i)));
         }
         return result;
     }
