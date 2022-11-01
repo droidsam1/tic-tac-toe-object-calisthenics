@@ -22,10 +22,6 @@ public class Board {
         return squares.get(position);
     }
 
-    public boolean isEmpty() {
-        return this.squares.isEmpty();
-    }
-
     public boolean hasPlayerACompleteRow(Player player) {
         int columnIndex = 0;
         boolean result = false;

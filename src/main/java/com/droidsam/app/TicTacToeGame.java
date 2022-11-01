@@ -28,7 +28,7 @@ public class TicTacToeGame {
     }
 
     private void enforcePlayerXPlaysFirst(Player player) {
-        if (board.isEmpty() && Player.X != player) {
+        if (NO_PLAYER.equals(lastPlayer) && Player.X != player) {
             throw new InvalidParameterException("Player X always goes first");
         }
     }
