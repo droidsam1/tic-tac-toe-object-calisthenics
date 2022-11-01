@@ -1,5 +1,7 @@
 package com.droidsam.app;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,7 +21,26 @@ public class Board {
     }
 
     public Player getPlayerAt(Coordinate position) {
+        if (!squares.containsKey(position)) {
+            return Player.NO_PLAYER;
+        }
         return squares.get(position);
+    }
+
+    public Collection<Coordinate> getMainDiagonal() {
+        Collection<Coordinate> coordinates = new ArrayList<>();
+        for (int i = 0; i < 3; i++) {
+            coordinates.add(Coordinate.of(i, i));
+        }
+        return coordinates;
+    }
+
+    public Collection<Coordinate> getInverseMainDiagonal() {
+        Collection<Coordinate> coordinates = new ArrayList<>();
+        for (int i = 0; i < 3; i++) {
+            coordinates.add(Coordinate.of(i, 2 - i));
+        }
+        return coordinates;
     }
 
     public boolean hasPlayerACompleteRow(Player player) {
@@ -58,6 +79,7 @@ public class Board {
         return result;
     }
 
+    @Deprecated
     public boolean hasPlayerACompleteMainDiagonal(Player player) {
         boolean result = true;
         for (int i = 0; i < 3; i++) {
@@ -66,6 +88,7 @@ public class Board {
         return result;
     }
 
+    @Deprecated
     public boolean hasPlayerACompleteInverseDiagonal(Player player) {
         boolean result = true;
         for (int i = 0; i < 3; i++) {
@@ -74,6 +97,7 @@ public class Board {
         return result;
     }
 
+    @Deprecated
     public boolean hasPlayerACompleteDiagonal(Player player) {
         if (hasPlayerACompleteMainDiagonal(player)) {
             return true;

@@ -1,6 +1,7 @@
 package com.droidsam.app;
 
 import java.security.InvalidParameterException;
+import java.util.Collection;
 
 import static com.droidsam.app.Player.NO_PLAYER;
 
@@ -38,14 +39,24 @@ public class TicTacToeGame {
     }
 
     public Player getWinner() {
-        if (board.hasPlayerACompleteRow(Player.X) || board.hasPlayerACompleteColumn(Player.X) || board.hasPlayerACompleteDiagonal(Player.X)) {
+
+        if (board.hasPlayerACompleteRow(Player.X) || board.hasPlayerACompleteColumn(Player.X) || hasPlayerPlaceThreeMarksInDiagonal(Player.X)) {
             return Player.X;
         }
+
         if (board.hasPlayerACompleteRow(Player.O) || board.hasPlayerACompleteColumn(Player.O) || board.hasPlayerACompleteDiagonal(Player.O)) {
             return Player.O;
         }
 
         return NO_PLAYER;
+    }
+
+    private boolean hasPlayerPlaceThreeMarksInDiagonal(Player player) {
+        return hasPlayerThreeMarksIn(board.getMainDiagonal(), player) || hasPlayerThreeMarksIn(board.getInverseMainDiagonal(), player);
+    }
+
+    private boolean hasPlayerThreeMarksIn(Collection<Coordinate> mainDiagonal, Player player) {
+        return mainDiagonal.stream().allMatch(c -> board.getPlayerAt(c).equals(player));
     }
 
     public boolean isDraw() {
