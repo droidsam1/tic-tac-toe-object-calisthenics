@@ -3,8 +3,7 @@ package com.droidsam.app;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class TicTacToeGameTest {
 
@@ -25,5 +24,6 @@ public class TicTacToeGameTest {
         Player player = new Player();
         Coordinate position = new Coordinate();
         assertDoesNotThrow(() -> game.place(player, position));
+        assertEquals(player, game.getPlayerAtPosition(position));
     }
 }
