@@ -41,6 +41,9 @@ public class TicTacToeGame {
         if (board.hasPlayerACompleteRow(Player.X)) {
             return Player.X;
         }
+        if (board.hasPlayerACompleteRow(Player.Y)) {
+            return Player.Y;
+        }
 
         return NO_PLAYER;
     }
