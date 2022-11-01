@@ -1,23 +1,29 @@
 package com.droidsam.app;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Board {
 
-    private final Grid grid;
+    private final Map<Coordinate, Player> squares;
+    private final int size;
+
 
     public Board() {
-        this.grid = new Grid(3, 3);
+        this.size = 3 * 3;
+        this.squares = new HashMap<>(size);
     }
 
     public void place(Player player, Coordinate position) {
-        grid.put(position, player);
+        squares.put(position, player);
     }
 
     public Player getPlayerAt(Coordinate position) {
-        return grid.get(position);
+        return squares.get(position);
     }
 
     public boolean isEmpty() {
-        return this.grid.isEmpty();
+        return this.squares.isEmpty();
     }
 
     public boolean hasPlayerACompleteRow(Player player) {
@@ -33,7 +39,7 @@ public class Board {
     private boolean hasCompleteRow(Player player, int columnIndex) {
         boolean result = true;
         for (int i = 0; i < 3; i++) {
-            result &= player.equals(this.grid.get(Coordinate.of(columnIndex, i)));
+            result &= player.equals(this.squares.get(Coordinate.of(columnIndex, i)));
         }
         return result;
     }
@@ -51,7 +57,7 @@ public class Board {
     private boolean hasCompleteColumn(Player player, int rowIndex) {
         boolean result = true;
         for (int i = 0; i < 3; i++) {
-            result &= player.equals(this.grid.get(Coordinate.of(i, rowIndex)));
+            result &= player.equals(this.squares.get(Coordinate.of(i, rowIndex)));
         }
         return result;
     }
@@ -59,7 +65,7 @@ public class Board {
     public boolean hasPlayerACompleteMainDiagonal(Player player) {
         boolean result = true;
         for (int i = 0; i < 3; i++) {
-            result &= player.equals(this.grid.get(Coordinate.of(i, i)));
+            result &= player.equals(this.squares.get(Coordinate.of(i, i)));
         }
         return result;
     }
@@ -67,7 +73,7 @@ public class Board {
     public boolean hasPlayerACompleteInverseDiagonal(Player player) {
         boolean result = true;
         for (int i = 0; i < 3; i++) {
-            result &= player.equals(this.grid.get(Coordinate.of(i, 2 - i)));
+            result &= player.equals(this.squares.get(Coordinate.of(i, 2 - i)));
         }
         return result;
     }
@@ -80,6 +86,6 @@ public class Board {
     }
 
     public boolean isFull() {
-        return grid.isFull();
+        return squares.size() == size;
     }
 }
