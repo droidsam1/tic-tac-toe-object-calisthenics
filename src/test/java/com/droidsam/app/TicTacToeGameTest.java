@@ -102,4 +102,27 @@ public class TicTacToeGameTest {
 
         assertEquals(Player.Y, game.getWinner());
     }
+
+    @Test
+    public void playerXWithThreeMarksInAnyDiagonalWinsTheGame() {
+        game.place(Player.X, Coordinate.of(0, 0));
+        game.place(Player.Y, Coordinate.of(1, 2));
+        game.place(Player.X, Coordinate.of(1, 1));
+        game.place(Player.Y, Coordinate.of(2, 1));
+        game.place(Player.X, Coordinate.of(2, 2));
+
+        assertEquals(Player.X, game.getWinner());
+    }
+
+    @Test
+    public void playerYWithThreeMarksInAnyDiagonalWinsTheGame() {
+        game.place(Player.X, Coordinate.of(1, 0));
+        game.place(Player.Y, Coordinate.of(0, 2));
+        game.place(Player.X, Coordinate.of(0, 1));
+        game.place(Player.Y, Coordinate.of(1, 1));
+        game.place(Player.X, Coordinate.of(2, 2));
+        game.place(Player.Y, Coordinate.of(2, 0));
+
+        assertEquals(Player.Y, game.getWinner());
+    }
 }

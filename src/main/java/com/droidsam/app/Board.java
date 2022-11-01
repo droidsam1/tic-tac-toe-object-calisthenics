@@ -55,4 +55,27 @@ public class Board {
         }
         return result;
     }
+
+    public boolean hasPlayerACompleteMainDiagonal(Player player) {
+        boolean result = true;
+        for (int i = 0; i < 3; i++) {
+            result &= player.equals(this.grid.get(Coordinate.of(i, i)));
+        }
+        return result;
+    }
+
+    public boolean hasPlayerACompleteInverseDiagonal(Player player) {
+        boolean result = true;
+        for (int i = 0; i < 3; i++) {
+            result &= player.equals(this.grid.get(Coordinate.of(i, 2 - i)));
+        }
+        return result;
+    }
+
+    public boolean hasPlayerACompleteDiagonal(Player player) {
+        if (hasPlayerACompleteMainDiagonal(player)) {
+            return true;
+        }
+        return hasPlayerACompleteInverseDiagonal(player);
+    }
 }

@@ -38,10 +38,10 @@ public class TicTacToeGame {
     }
 
     public Player getWinner() {
-        if (board.hasPlayerACompleteRow(Player.X) || board.hasPlayerACompleteColumn(Player.X)) {
+        if (board.hasPlayerACompleteRow(Player.X) || board.hasPlayerACompleteColumn(Player.X) || board.hasPlayerACompleteDiagonal(Player.X)) {
             return Player.X;
         }
-        if (board.hasPlayerACompleteRow(Player.Y) || board.hasPlayerACompleteColumn(Player.Y)) {
+        if (board.hasPlayerACompleteRow(Player.Y) || board.hasPlayerACompleteColumn(Player.Y) || board.hasPlayerACompleteDiagonal(Player.Y)) {
             return Player.Y;
         }
 
