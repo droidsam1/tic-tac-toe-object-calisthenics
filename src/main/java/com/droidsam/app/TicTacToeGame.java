@@ -40,23 +40,29 @@ public class TicTacToeGame {
 
     public Player getWinner() {
 
-        if (board.hasPlayerACompleteRow(Player.X) || board.hasPlayerACompleteColumn(Player.X) || hasPlayerPlaceThreeMarksInDiagonal(Player.X)) {
+        if (board.hasPlayerACompleteRow(Player.X) || hasPlayerPlaceThreeMarksInRow(Player.X) || hasPlayerPlaceThreeMarksInDiagonal(Player.X)) {
             return Player.X;
         }
 
-        if (board.hasPlayerACompleteRow(Player.O) || board.hasPlayerACompleteColumn(Player.O) || hasPlayerPlaceThreeMarksInDiagonal(Player.O)) {
+        if (board.hasPlayerACompleteRow(Player.O) || hasPlayerPlaceThreeMarksInRow(Player.O) || hasPlayerPlaceThreeMarksInDiagonal(Player.O)) {
             return Player.O;
         }
 
         return NO_PLAYER;
     }
 
+    private boolean hasPlayerPlaceThreeMarksInRow(Player player) {
+        return hasPlayerThreeMarksIn(board.getRow(0), player) || hasPlayerThreeMarksIn(board.getRow(1), player) || hasPlayerThreeMarksIn(board.getRow(2), player);
+
+    }
+
+
     private boolean hasPlayerPlaceThreeMarksInDiagonal(Player player) {
         return hasPlayerThreeMarksIn(board.getMainDiagonal(), player) || hasPlayerThreeMarksIn(board.getInverseMainDiagonal(), player);
     }
 
-    private boolean hasPlayerThreeMarksIn(Collection<Coordinate> mainDiagonal, Player player) {
-        return mainDiagonal.stream().allMatch(c -> board.getPlayerAt(c).equals(player));
+    private boolean hasPlayerThreeMarksIn(Collection<Coordinate> positions, Player player) {
+        return positions.stream().allMatch(c -> board.getPlayerAt(c).equals(player));
     }
 
     public boolean isDraw() {

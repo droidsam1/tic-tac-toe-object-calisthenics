@@ -27,6 +27,14 @@ public class Board {
         return squares.get(position);
     }
 
+    public Collection<Coordinate> getRow(int rowNumber) {
+        Collection<Coordinate> coordinates = new ArrayList<>();
+        for (int i = 0; i < 3; i++) {
+            coordinates.add(Coordinate.of(i, rowNumber));
+        }
+        return coordinates;
+    }
+
     public Collection<Coordinate> getMainDiagonal() {
         Collection<Coordinate> coordinates = new ArrayList<>();
         for (int i = 0; i < 3; i++) {
