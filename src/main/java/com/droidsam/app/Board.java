@@ -79,31 +79,6 @@ public class Board {
         return result;
     }
 
-    @Deprecated
-    public boolean hasPlayerACompleteMainDiagonal(Player player) {
-        boolean result = true;
-        for (int i = 0; i < 3; i++) {
-            result &= player.equals(this.squares.get(Coordinate.of(i, i)));
-        }
-        return result;
-    }
-
-    @Deprecated
-    public boolean hasPlayerACompleteInverseDiagonal(Player player) {
-        boolean result = true;
-        for (int i = 0; i < 3; i++) {
-            result &= player.equals(this.squares.get(Coordinate.of(i, 2 - i)));
-        }
-        return result;
-    }
-
-    @Deprecated
-    public boolean hasPlayerACompleteDiagonal(Player player) {
-        if (hasPlayerACompleteMainDiagonal(player)) {
-            return true;
-        }
-        return hasPlayerACompleteInverseDiagonal(player);
-    }
 
     public boolean isFull() {
         return squares.size() == size;
