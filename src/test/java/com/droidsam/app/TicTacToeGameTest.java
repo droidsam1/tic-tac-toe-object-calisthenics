@@ -3,8 +3,9 @@ package com.droidsam.app;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import java.security.InvalidParameterException;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class TicTacToeGameTest {
 
@@ -33,5 +34,10 @@ public class TicTacToeGameTest {
 
         assertEquals(Player.X, game.getPlayerAtPosition(position));
         assertEquals(Player.Y, game.getPlayerAtPosition(anotherPosition));
+    }
+
+    @Test
+    public void playerXAlwaysGoesFirst() {
+        assertThrows(InvalidParameterException.class, () -> game.place(Player.Y, Coordinate.of(0, 0)));
     }
 }

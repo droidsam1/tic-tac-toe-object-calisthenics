@@ -1,5 +1,8 @@
 package com.droidsam.app;
 
+import java.util.Arrays;
+import java.util.Objects;
+
 public class Grid {
 
     private final Player[][] squares;
@@ -14,5 +17,9 @@ public class Grid {
 
     public Player get(Coordinate position) {
         return this.squares[position.getX()][position.getY()];
+    }
+
+    public boolean isEmpty() {
+        return Arrays.stream(this.squares).flatMap(Arrays::stream).allMatch(Objects::isNull);
     }
 }

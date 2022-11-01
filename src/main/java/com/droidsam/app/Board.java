@@ -15,4 +15,8 @@ public class Board {
     public Player getPlayerAt(Coordinate position) {
         return grid.get(position);
     }
+
+    public boolean isEmpty() {
+        return this.grid.isEmpty();
+    }
 }
