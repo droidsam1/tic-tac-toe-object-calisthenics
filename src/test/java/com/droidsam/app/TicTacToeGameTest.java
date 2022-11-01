@@ -21,7 +21,7 @@ public class TicTacToeGameTest {
 
     @Test
     public void aPlayerCanPlace() {
-        Player player = new Player();
+        Player player = Player.X;
         Coordinate position = Coordinate.of(0, 0);
         assertDoesNotThrow(() -> game.place(player, position));
         assertEquals(player, game.getPlayerAtPosition(position));
@@ -29,9 +29,9 @@ public class TicTacToeGameTest {
 
     @Test
     public void gameRememberPlayersMoves() {
-        Player player = new Player();
+        Player player = Player.X;
         Coordinate position = Coordinate.of(0, 0);
-        Player anotherPlayer = new Player();
+        Player anotherPlayer = Player.Y;
         Coordinate anotherPosition = Coordinate.of(1, 1);
 
         assertDoesNotThrow(() -> game.place(player, position));
