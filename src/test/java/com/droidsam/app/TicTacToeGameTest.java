@@ -46,4 +46,14 @@ public class TicTacToeGameTest {
         assertDoesNotThrow(() -> game.place(Player.X, Coordinate.of(0, 0)));
         assertThrows(InvalidParameterException.class, () -> game.place(Player.X, Coordinate.of(1, 1)));
     }
+
+    @Test
+    public void noPlayerWinsUntilPutsAtLeastThreeMarksOnTheBoard() {
+        game.place(Player.X, Coordinate.of(0, 0));
+        game.place(Player.Y, Coordinate.of(1, 1));
+        game.place(Player.X, Coordinate.of(0, 1));
+        game.place(Player.Y, Coordinate.of(1, 2));
+
+        assertEquals(Player.NO_PLAYER, game.getWinner());
+    }
 }

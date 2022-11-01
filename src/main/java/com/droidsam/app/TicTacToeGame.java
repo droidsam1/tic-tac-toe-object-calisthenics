@@ -36,4 +36,8 @@ public class TicTacToeGame {
     public Player getPlayerAtPosition(Coordinate position) {
         return board.getPlayerAt(position);
     }
+
+    public Player getWinner() {
+        return NO_PLAYER;
+    }
 }
