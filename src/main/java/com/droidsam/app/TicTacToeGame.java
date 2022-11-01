@@ -38,6 +38,10 @@ public class TicTacToeGame {
     }
 
     public Player getWinner() {
+        if (board.hasPlayerACompleteRow(Player.X)) {
+            return Player.X;
+        }
+
         return NO_PLAYER;
     }
 }

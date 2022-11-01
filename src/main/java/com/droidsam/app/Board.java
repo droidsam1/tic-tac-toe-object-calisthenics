@@ -19,4 +19,12 @@ public class Board {
     public boolean isEmpty() {
         return this.grid.isEmpty();
     }
+
+    public boolean hasPlayerACompleteRow(Player player) {
+        boolean result = true;
+        for (int i = 0; i < 3; i++) {
+            result &= player.equals(this.grid.get(Coordinate.of(0, i)));
+        }
+        return result;
+    }
 }
