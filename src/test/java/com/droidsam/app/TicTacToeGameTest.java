@@ -58,7 +58,7 @@ public class TicTacToeGameTest {
     }
 
     @Test
-    public void playerXWithThreeMarksInARowHorizontallyWinsTheGame() {
+    public void playerXWithThreeMarksInARowWinsTheGame() {
         game.place(Player.X, Coordinate.of(0, 0));
         game.place(Player.Y, Coordinate.of(1, 1));
         game.place(Player.X, Coordinate.of(0, 1));
@@ -69,7 +69,7 @@ public class TicTacToeGameTest {
     }
 
     @Test
-    public void playerYWithThreeMarksInARowHorizontallyWinsTheGame() {
+    public void playerYWithThreeMarksInAnyRowWinsTheGame() {
         game.place(Player.X, Coordinate.of(2, 0));
         game.place(Player.Y, Coordinate.of(1, 0));
         game.place(Player.X, Coordinate.of(0, 1));
@@ -81,13 +81,25 @@ public class TicTacToeGameTest {
     }
 
     @Test
-    public void aPlayerWithThreeMarksInAnyRowHorizontallyWinsTheGame() {
-        game.place(Player.X, Coordinate.of(1, 0));
-        game.place(Player.Y, Coordinate.of(0, 1));
-        game.place(Player.X, Coordinate.of(1, 1));
+    public void playerXWithThreeMarksInAnyColumnWinsTheGame() {
+        game.place(Player.X, Coordinate.of(0, 0));
+        game.place(Player.Y, Coordinate.of(1, 1));
+        game.place(Player.X, Coordinate.of(0, 1));
         game.place(Player.Y, Coordinate.of(2, 2));
-        game.place(Player.X, Coordinate.of(1, 2));
+        game.place(Player.X, Coordinate.of(0, 2));
 
         assertEquals(Player.X, game.getWinner());
+    }
+
+    @Test
+    public void playerYWithThreeMarksInAnyColumnWinsTheGame() {
+        game.place(Player.X, Coordinate.of(0, 0));
+        game.place(Player.Y, Coordinate.of(1, 0));
+        game.place(Player.X, Coordinate.of(0, 1));
+        game.place(Player.Y, Coordinate.of(1, 1));
+        game.place(Player.X, Coordinate.of(2, 2));
+        game.place(Player.Y, Coordinate.of(1, 2));
+
+        assertEquals(Player.Y, game.getWinner());
     }
 }

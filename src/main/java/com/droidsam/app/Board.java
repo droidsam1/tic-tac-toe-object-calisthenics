@@ -37,4 +37,22 @@ public class Board {
         }
         return result;
     }
+
+    public boolean hasPlayerACompleteColumn(Player player) {
+        int rowIndex = 0;
+        boolean result = false;
+        while (rowIndex < 3 && !result) {
+            result = hasCompleteColumn(player, rowIndex);
+            rowIndex++;
+        }
+        return result;
+    }
+
+    private boolean hasCompleteColumn(Player player, int rowIndex) {
+        boolean result = true;
+        for (int i = 0; i < 3; i++) {
+            result &= player.equals(this.grid.get(Coordinate.of(i, rowIndex)));
+        }
+        return result;
+    }
 }
