@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class Player {
     public static final Player X = new Player('X');
-    public static final Player Y = new Player('Y');
+    public static final Player O = new Player('O');
     public static final Player NO_PLAYER = new Player('-');
     private final char mark;
 

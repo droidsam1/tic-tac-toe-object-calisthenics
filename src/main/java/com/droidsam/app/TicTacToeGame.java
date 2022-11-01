@@ -41,8 +41,8 @@ public class TicTacToeGame {
         if (board.hasPlayerACompleteRow(Player.X) || board.hasPlayerACompleteColumn(Player.X) || board.hasPlayerACompleteDiagonal(Player.X)) {
             return Player.X;
         }
-        if (board.hasPlayerACompleteRow(Player.Y) || board.hasPlayerACompleteColumn(Player.Y) || board.hasPlayerACompleteDiagonal(Player.Y)) {
-            return Player.Y;
+        if (board.hasPlayerACompleteRow(Player.O) || board.hasPlayerACompleteColumn(Player.O) || board.hasPlayerACompleteDiagonal(Player.O)) {
+            return Player.O;
         }
 
         return NO_PLAYER;
