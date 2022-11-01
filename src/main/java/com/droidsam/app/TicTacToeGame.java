@@ -2,17 +2,29 @@ package com.droidsam.app;
 
 import java.security.InvalidParameterException;
 
+import static com.droidsam.app.Player.NO_PLAYER;
+
 public class TicTacToeGame {
 
     private final Board board;
+    private Player lastPlayer;
 
     public TicTacToeGame() {
         board = new Board();
+        lastPlayer = NO_PLAYER;
     }
 
     public void place(Player player, Coordinate position) {
         enforcePlayerXPlaysFirst(player);
+        enforcePlayersAlternatePlacing(player);
         board.place(player, position);
+        lastPlayer = player;
+    }
+
+    private void enforcePlayersAlternatePlacing(Player player) {
+        if (lastPlayer.equals(player)) {
+            throw new InvalidParameterException("Players must alternate placing");
+        }
     }
 
     private void enforcePlayerXPlaysFirst(Player player) {

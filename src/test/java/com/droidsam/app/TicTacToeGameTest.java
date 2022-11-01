@@ -40,4 +40,10 @@ public class TicTacToeGameTest {
     public void playerXAlwaysGoesFirst() {
         assertThrows(InvalidParameterException.class, () -> game.place(Player.Y, Coordinate.of(0, 0)));
     }
+
+    @Test
+    public void playersMustAlternatePlacing() {
+        assertDoesNotThrow(() -> game.place(Player.X, Coordinate.of(0, 0)));
+        assertThrows(InvalidParameterException.class, () -> game.place(Player.X, Coordinate.of(1, 1)));
+    }
 }
