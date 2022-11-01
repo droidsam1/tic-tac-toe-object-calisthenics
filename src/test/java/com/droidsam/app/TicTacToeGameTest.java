@@ -3,7 +3,8 @@ package com.droidsam.app;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TicTacToeGameTest {
 
@@ -15,29 +16,22 @@ public class TicTacToeGameTest {
     }
 
     @Test
-    public void canStartTheGame() {
-        assertNotNull(game);
-    }
-
-    @Test
     public void aPlayerCanPlace() {
-        Player player = Player.X;
         Coordinate position = Coordinate.of(0, 0);
-        assertDoesNotThrow(() -> game.place(player, position));
-        assertEquals(player, game.getPlayerAtPosition(position));
+
+        assertDoesNotThrow(() -> game.place(Player.X, position));
+        assertEquals(Player.X, game.getPlayerAtPosition(position));
     }
 
     @Test
     public void gameRememberPlayersMoves() {
-        Player player = Player.X;
         Coordinate position = Coordinate.of(0, 0);
-        Player anotherPlayer = Player.Y;
         Coordinate anotherPosition = Coordinate.of(1, 1);
 
-        assertDoesNotThrow(() -> game.place(player, position));
-        assertDoesNotThrow(() -> game.place(anotherPlayer, anotherPosition));
+        assertDoesNotThrow(() -> game.place(Player.X, position));
+        assertDoesNotThrow(() -> game.place(Player.Y, anotherPosition));
 
-        assertEquals(player, game.getPlayerAtPosition(position));
-        assertEquals(anotherPlayer, game.getPlayerAtPosition(anotherPosition));
+        assertEquals(Player.X, game.getPlayerAtPosition(position));
+        assertEquals(Player.Y, game.getPlayerAtPosition(anotherPosition));
     }
 }
