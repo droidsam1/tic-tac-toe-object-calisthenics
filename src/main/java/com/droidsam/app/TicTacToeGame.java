@@ -40,11 +40,11 @@ public class TicTacToeGame {
 
     public Player getWinner() {
 
-        if (board.hasPlayerACompleteRow(Player.X) || hasPlayerPlaceThreeMarksInRow(Player.X) || hasPlayerPlaceThreeMarksInDiagonal(Player.X)) {
+        if (hasPlayerPlaceThreeMarksInColumn(Player.X) || hasPlayerPlaceThreeMarksInRow(Player.X) || hasPlayerPlaceThreeMarksInDiagonal(Player.X)) {
             return Player.X;
         }
 
-        if (board.hasPlayerACompleteRow(Player.O) || hasPlayerPlaceThreeMarksInRow(Player.O) || hasPlayerPlaceThreeMarksInDiagonal(Player.O)) {
+        if (hasPlayerPlaceThreeMarksInColumn(Player.O) || hasPlayerPlaceThreeMarksInRow(Player.O) || hasPlayerPlaceThreeMarksInDiagonal(Player.O)) {
             return Player.O;
         }
 
@@ -53,9 +53,11 @@ public class TicTacToeGame {
 
     private boolean hasPlayerPlaceThreeMarksInRow(Player player) {
         return hasPlayerThreeMarksIn(board.getRow(0), player) || hasPlayerThreeMarksIn(board.getRow(1), player) || hasPlayerThreeMarksIn(board.getRow(2), player);
-
     }
 
+    private boolean hasPlayerPlaceThreeMarksInColumn(Player player) {
+        return hasPlayerThreeMarksIn(board.getColumn(0), player) || hasPlayerThreeMarksIn(board.getColumn(1), player) || hasPlayerThreeMarksIn(board.getColumn(2), player);
+    }
 
     private boolean hasPlayerPlaceThreeMarksInDiagonal(Player player) {
         return hasPlayerThreeMarksIn(board.getMainDiagonal(), player) || hasPlayerThreeMarksIn(board.getInverseMainDiagonal(), player);

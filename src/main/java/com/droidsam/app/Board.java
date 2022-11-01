@@ -35,6 +35,14 @@ public class Board {
         return coordinates;
     }
 
+    public Collection<Coordinate> getColumn(int columnNumber) {
+        Collection<Coordinate> coordinates = new ArrayList<>();
+        for (int i = 0; i < 3; i++) {
+            coordinates.add(Coordinate.of(columnNumber, i));
+        }
+        return coordinates;
+    }
+
     public Collection<Coordinate> getMainDiagonal() {
         Collection<Coordinate> coordinates = new ArrayList<>();
         for (int i = 0; i < 3; i++) {
@@ -50,43 +58,6 @@ public class Board {
         }
         return coordinates;
     }
-
-    public boolean hasPlayerACompleteRow(Player player) {
-        int columnIndex = 0;
-        boolean result = false;
-        while (columnIndex < 3 && !result) {
-            result = hasCompleteRow(player, columnIndex);
-            columnIndex++;
-        }
-        return result;
-    }
-
-    private boolean hasCompleteRow(Player player, int columnIndex) {
-        boolean result = true;
-        for (int i = 0; i < 3; i++) {
-            result &= player.equals(this.squares.get(Coordinate.of(columnIndex, i)));
-        }
-        return result;
-    }
-
-    public boolean hasPlayerACompleteColumn(Player player) {
-        int rowIndex = 0;
-        boolean result = false;
-        while (rowIndex < 3 && !result) {
-            result = hasCompleteColumn(player, rowIndex);
-            rowIndex++;
-        }
-        return result;
-    }
-
-    private boolean hasCompleteColumn(Player player, int rowIndex) {
-        boolean result = true;
-        for (int i = 0; i < 3; i++) {
-            result &= player.equals(this.squares.get(Coordinate.of(i, rowIndex)));
-        }
-        return result;
-    }
-
 
     public boolean isFull() {
         return squares.size() == size;
