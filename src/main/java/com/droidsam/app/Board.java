@@ -10,10 +10,12 @@ import static com.droidsam.app.Player.NO_PLAYER;
 public class Board {
 
     private final Map<Coordinate, Player> squares;
+    private final int size;
 
 
     public Board() {
-        this.squares = new HashMap<>(3 * 3);
+        this.size = 3;
+        this.squares = new HashMap<>(getFullSize(size));
     }
 
     public void place(Player player, Coordinate position) {
@@ -42,44 +44,48 @@ public class Board {
         return squares.get(position);
     }
 
-    private Collection<Coordinate> getRow(int rowNumber) {
+    private Collection<Coordinate> getCoordinatesOfRow(int rowNumber) {
         Collection<Coordinate> coordinates = new ArrayList<>();
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < size; i++) {
             coordinates.add(Coordinate.of(i, rowNumber));
         }
         return coordinates;
     }
 
-    private Collection<Coordinate> getColumn(int columnNumber) {
+    private Collection<Coordinate> getCoordinatesOfColumn(int columnNumber) {
         Collection<Coordinate> coordinates = new ArrayList<>();
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < size; i++) {
             coordinates.add(Coordinate.of(columnNumber, i));
         }
         return coordinates;
     }
 
-    private Collection<Coordinate> getMainDiagonal() {
+    private Collection<Coordinate> getCoordinatesOfMainDiagonal() {
         Collection<Coordinate> coordinates = new ArrayList<>();
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < size; i++) {
             coordinates.add(Coordinate.of(i, i));
         }
         return coordinates;
     }
 
-    private Collection<Coordinate> getInverseMainDiagonal() {
+    private Collection<Coordinate> getCoordinatesOfInverseMainDiagonal() {
         Collection<Coordinate> coordinates = new ArrayList<>();
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < size; i++) {
             coordinates.add(Coordinate.of(i, 2 - i));
         }
         return coordinates;
     }
 
     private boolean hasPlayerThreeMarksIn(Collection<Coordinate> positions, Player player) {
-        return positions.stream().filter(c -> this.getPlayerAt(c).equals(player)).count() == 3;
+        return positions.stream().filter(c -> this.getPlayerAt(c).equals(player)).count() == size;
     }
 
     private boolean isFull() {
-        return this.squares.values().stream().filter(p -> !p.equals(NO_PLAYER)).count() == 9;
+        return this.squares.values().stream().filter(p -> !p.equals(NO_PLAYER)).count() == getFullSize(size);
+    }
+
+    private int getFullSize(int size) {
+        return size * size;
     }
 
     private boolean isDraw() {
@@ -100,15 +106,23 @@ public class Board {
     }
 
     private boolean hasPlayerPlaceThreeMarksInRow(Player player) {
-        return hasPlayerThreeMarksIn(this.getRow(0), player) || hasPlayerThreeMarksIn(this.getRow(1), player) || hasPlayerThreeMarksIn(this.getRow(2), player);
+        boolean result = false;
+        for (int i = 0; i < size; i++) {
+            result |= hasPlayerThreeMarksIn(this.getCoordinatesOfRow(i), player);
+        }
+        return result;
     }
 
     private boolean hasPlayerPlaceThreeMarksInColumn(Player player) {
-        return hasPlayerThreeMarksIn(this.getColumn(0), player) || hasPlayerThreeMarksIn(this.getColumn(1), player) || hasPlayerThreeMarksIn(this.getColumn(2), player);
+        boolean result = false;
+        for (int i = 0; i < size; i++) {
+            result |= hasPlayerThreeMarksIn(this.getCoordinatesOfColumn(i), player);
+        }
+        return result;
     }
 
     private boolean hasPlayerPlaceThreeMarksInDiagonal(Player player) {
-        return hasPlayerThreeMarksIn(this.getMainDiagonal(), player) || hasPlayerThreeMarksIn(this.getInverseMainDiagonal(), player);
+        return hasPlayerThreeMarksIn(this.getCoordinatesOfMainDiagonal(), player) || hasPlayerThreeMarksIn(this.getCoordinatesOfInverseMainDiagonal(), player);
     }
 
 }
