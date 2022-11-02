@@ -68,6 +68,10 @@ public class TicTacToeGame {
     }
 
     public boolean isDraw() {
-        return board.isFull() && NO_PLAYER.equals(getWinner());
+        return isBoardFull() && NO_PLAYER.equals(getWinner());
+    }
+
+    private boolean isBoardFull() {
+        return board.getPlayersIn(board.getMainDiagonal()).stream().noneMatch(p -> p.equals(NO_PLAYER));
     }
 }

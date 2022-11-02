@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class Board {
 
@@ -59,7 +60,7 @@ public class Board {
         return coordinates;
     }
 
-    public boolean isFull() {
-        return squares.size() == size;
+    public Collection<Player> getPlayersIn(Collection<Coordinate> positions) {
+        return positions.stream().map(this::getPlayerAt).distinct().collect(Collectors.toList());
     }
 }
