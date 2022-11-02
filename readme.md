@@ -6,7 +6,7 @@ Implement the game of Tic-Tac-Toe again, following all TDD practices plus object
 finished compared the solution you came up with first and the one using object calisthenics
 
     | Tip
-    | Try to make invalid state unrepresentable. Make the ocmpiler work for you. If client 
+    | Try to make invalid state unrepresentable. Make the compiler work for you. If client 
     | code tries to pass invalid state to your code, the compile should signal an error
 
 ### Notes
