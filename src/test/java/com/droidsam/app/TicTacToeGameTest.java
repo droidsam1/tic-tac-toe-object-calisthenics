@@ -55,6 +55,7 @@ public class TicTacToeGameTest {
         game.place(Player.O, Coordinate.of(1, 2));
 
         assertEquals(Player.NO_PLAYER, game.getWinner());
+        assertFalse(game.isDraw());
     }
 
     @Test
