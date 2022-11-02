@@ -55,7 +55,7 @@ public class TicTacToeGameTest {
         game.place(Player.O, Coordinate.of(1, 2));
 
         assertEquals(Player.NO_PLAYER, game.getWinner());
-        assertFalse(game.isDraw());
+        assertEquals(GameStatus.ONGOING, game.geStatus());
     }
 
     @Test
@@ -67,6 +67,7 @@ public class TicTacToeGameTest {
         game.place(Player.X, Coordinate.of(0, 2));
 
         assertEquals(Player.X, game.getWinner());
+        assertEquals(GameStatus.WON, game.geStatus());
     }
 
     @Test
@@ -79,6 +80,7 @@ public class TicTacToeGameTest {
         game.place(Player.O, Coordinate.of(1, 2));
 
         assertEquals(Player.O, game.getWinner());
+        assertEquals(GameStatus.WON, game.geStatus());
     }
 
     @Test
@@ -90,6 +92,7 @@ public class TicTacToeGameTest {
         game.place(Player.X, Coordinate.of(0, 2));
 
         assertEquals(Player.X, game.getWinner());
+        assertEquals(GameStatus.WON, game.geStatus());
     }
 
     @Test
@@ -102,6 +105,7 @@ public class TicTacToeGameTest {
         game.place(Player.O, Coordinate.of(1, 2));
 
         assertEquals(Player.O, game.getWinner());
+        assertEquals(GameStatus.WON, game.geStatus());
     }
 
     @Test
@@ -113,6 +117,7 @@ public class TicTacToeGameTest {
         game.place(Player.X, Coordinate.of(2, 2));
 
         assertEquals(Player.X, game.getWinner());
+        assertEquals(GameStatus.WON, game.geStatus());
     }
 
     @Test
@@ -125,7 +130,7 @@ public class TicTacToeGameTest {
         game.place(Player.O, Coordinate.of(2, 0));
 
         assertEquals(Player.O, game.getWinner());
-        assertFalse(game.isDraw());
+        assertEquals(GameStatus.WON, game.geStatus());
     }
 
 
@@ -142,6 +147,7 @@ public class TicTacToeGameTest {
         game.place(Player.X, Coordinate.of(2, 0));
 
         assertEquals(Player.NO_PLAYER, game.getWinner());
-        assertTrue(game.isDraw());
+        assertEquals(GameStatus.DRAW, game.geStatus());
+
     }
 }

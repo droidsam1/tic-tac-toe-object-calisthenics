@@ -37,12 +37,11 @@ public class TicTacToeGame {
         return board.getPlayerAt(position);
     }
 
-
     public Player getWinner() {
         return board.getWinner();
     }
 
-    public boolean isDraw() {
-        return board.isDraw();
+    public GameStatus geStatus() {
+        return board.getStatus();
     }
 }

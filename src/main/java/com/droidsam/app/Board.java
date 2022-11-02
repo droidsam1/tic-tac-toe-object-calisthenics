@@ -4,23 +4,35 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import static com.droidsam.app.Player.NO_PLAYER;
 
 public class Board {
 
     private final Map<Coordinate, Player> squares;
-    private final int fullSize;
 
 
     public Board() {
-        this.fullSize = 3 * 3;
-        this.squares = new HashMap<>(fullSize);
+        this.squares = new HashMap<>(3 * 3);
     }
 
     public void place(Player player, Coordinate position) {
+        var status = getStatus();
+        if (status != GameStatus.ONGOING) {
+            return;
+        }
+
         squares.put(position, player);
+    }
+
+    public GameStatus getStatus() {
+        if (getWinner() != NO_PLAYER) {
+            return GameStatus.WON;
+        }
+        if (isDraw()) {
+            return GameStatus.DRAW;
+        }
+        return GameStatus.ONGOING;
     }
 
     public Player getPlayerAt(Coordinate position) {
@@ -30,7 +42,7 @@ public class Board {
         return squares.get(position);
     }
 
-    public Collection<Coordinate> getRow(int rowNumber) {
+    private Collection<Coordinate> getRow(int rowNumber) {
         Collection<Coordinate> coordinates = new ArrayList<>();
         for (int i = 0; i < 3; i++) {
             coordinates.add(Coordinate.of(i, rowNumber));
@@ -38,7 +50,7 @@ public class Board {
         return coordinates;
     }
 
-    public Collection<Coordinate> getColumn(int columnNumber) {
+    private Collection<Coordinate> getColumn(int columnNumber) {
         Collection<Coordinate> coordinates = new ArrayList<>();
         for (int i = 0; i < 3; i++) {
             coordinates.add(Coordinate.of(columnNumber, i));
@@ -46,7 +58,7 @@ public class Board {
         return coordinates;
     }
 
-    public Collection<Coordinate> getMainDiagonal() {
+    private Collection<Coordinate> getMainDiagonal() {
         Collection<Coordinate> coordinates = new ArrayList<>();
         for (int i = 0; i < 3; i++) {
             coordinates.add(Coordinate.of(i, i));
@@ -54,7 +66,7 @@ public class Board {
         return coordinates;
     }
 
-    public Collection<Coordinate> getInverseMainDiagonal() {
+    private Collection<Coordinate> getInverseMainDiagonal() {
         Collection<Coordinate> coordinates = new ArrayList<>();
         for (int i = 0; i < 3; i++) {
             coordinates.add(Coordinate.of(i, 2 - i));
@@ -62,19 +74,15 @@ public class Board {
         return coordinates;
     }
 
-    public Collection<Player> getPlayers() {
-        return this.squares.values().stream().distinct().collect(Collectors.toList());
-    }
-
     private boolean hasPlayerThreeMarksIn(Collection<Coordinate> positions, Player player) {
         return positions.stream().filter(c -> this.getPlayerAt(c).equals(player)).count() == 3;
     }
 
     private boolean isFull() {
-        return this.squares.size() == this.fullSize;
+        return this.squares.values().stream().filter(p -> !p.equals(NO_PLAYER)).count() == 9;
     }
 
-    public boolean isDraw() {
+    private boolean isDraw() {
         return this.isFull() && NO_PLAYER.equals(this.getWinner());
     }
 
