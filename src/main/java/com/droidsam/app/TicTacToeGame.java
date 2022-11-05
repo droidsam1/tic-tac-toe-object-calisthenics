@@ -1,8 +1,11 @@
 package com.droidsam.app;
 
 import java.security.InvalidParameterException;
+import java.util.stream.Stream;
 
+import static com.droidsam.app.MatrixStatus.FULL;
 import static com.droidsam.app.Player.NO_PLAYER;
+import static com.droidsam.app.TypeThreeMarksInARow.NONE;
 
 public class TicTacToeGame {
 
@@ -17,6 +20,9 @@ public class TicTacToeGame {
     public void place(Player player, Coordinate position) {
         enforcePlayerXPlaysFirst(player);
         enforcePlayersAlternatePlacing(player);
+        if (getStatus() != GameStatus.ONGOING) {
+            return;
+        }
         board.place(player, position);
         lastPlayer = player;
     }
@@ -37,11 +43,22 @@ public class TicTacToeGame {
         return board.getPlayerAt(position);
     }
 
-    public Player getWinner() {
-        return board.getWinner();
+    private boolean isDraw() {
+        return FULL.equals(this.board.getFillingStatus()) && NO_PLAYER.equals(this.getWinner());
     }
 
-    public GameStatus geStatus() {
-        return board.getStatus();
+    public Player getWinner() {
+        return Stream.of(Player.O, Player.X).filter(player -> !this.board.getPlayerThreeMarksInARow(player).equals(NONE)).findFirst().orElse(NO_PLAYER);
     }
+
+    public GameStatus getStatus() {
+        if (getWinner() != NO_PLAYER) {
+            return GameStatus.WON;
+        }
+        if (isDraw()) {
+            return GameStatus.DRAW;
+        }
+        return GameStatus.ONGOING;
+    }
+
 }

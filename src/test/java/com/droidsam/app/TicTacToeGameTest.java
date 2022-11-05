@@ -55,7 +55,7 @@ public class TicTacToeGameTest {
         game.place(Player.O, Coordinate.of(1, 2));
 
         assertEquals(Player.NO_PLAYER, game.getWinner());
-        assertEquals(GameStatus.ONGOING, game.geStatus());
+        assertEquals(GameStatus.ONGOING, game.getStatus());
     }
 
     @Test
@@ -67,7 +67,7 @@ public class TicTacToeGameTest {
         game.place(Player.X, Coordinate.of(0, 2));
 
         assertEquals(Player.X, game.getWinner());
-        assertEquals(GameStatus.WON, game.geStatus());
+        assertEquals(GameStatus.WON, game.getStatus());
     }
 
     @Test
@@ -80,7 +80,7 @@ public class TicTacToeGameTest {
         game.place(Player.O, Coordinate.of(1, 2));
 
         assertEquals(Player.O, game.getWinner());
-        assertEquals(GameStatus.WON, game.geStatus());
+        assertEquals(GameStatus.WON, game.getStatus());
     }
 
     @Test
@@ -92,7 +92,7 @@ public class TicTacToeGameTest {
         game.place(Player.X, Coordinate.of(0, 2));
 
         assertEquals(Player.X, game.getWinner());
-        assertEquals(GameStatus.WON, game.geStatus());
+        assertEquals(GameStatus.WON, game.getStatus());
     }
 
     @Test
@@ -105,7 +105,7 @@ public class TicTacToeGameTest {
         game.place(Player.O, Coordinate.of(1, 2));
 
         assertEquals(Player.O, game.getWinner());
-        assertEquals(GameStatus.WON, game.geStatus());
+        assertEquals(GameStatus.WON, game.getStatus());
     }
 
     @Test
@@ -117,7 +117,7 @@ public class TicTacToeGameTest {
         game.place(Player.X, Coordinate.of(2, 2));
 
         assertEquals(Player.X, game.getWinner());
-        assertEquals(GameStatus.WON, game.geStatus());
+        assertEquals(GameStatus.WON, game.getStatus());
     }
 
     @Test
@@ -130,7 +130,7 @@ public class TicTacToeGameTest {
         game.place(Player.O, Coordinate.of(2, 0));
 
         assertEquals(Player.O, game.getWinner());
-        assertEquals(GameStatus.WON, game.geStatus());
+        assertEquals(GameStatus.WON, game.getStatus());
     }
 
 
@@ -147,7 +147,7 @@ public class TicTacToeGameTest {
         game.place(Player.X, Coordinate.of(2, 0));
 
         assertEquals(Player.NO_PLAYER, game.getWinner());
-        assertEquals(GameStatus.DRAW, game.geStatus());
+        assertEquals(GameStatus.DRAW, game.getStatus());
 
     }
 }
