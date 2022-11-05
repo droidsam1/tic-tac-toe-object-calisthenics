@@ -35,8 +35,12 @@ public class SquareMatrix {
             return TypeOfSquareRow.DIAGONALLY;
         }
 
-        if(hasPlayerThreeMarksInAnyColumn(player)){
+        if (hasPlayerThreeMarksInAnyColumn(player)) {
             return TypeOfSquareRow.HORIZONTALLY;
+        }
+
+        if (hasPlayerThreeMarksInAnyRow(player)) {
+            return TypeOfSquareRow.VERTICALLY;
         }
 
         return TypeOfSquareRow.NONE;
@@ -59,8 +63,16 @@ public class SquareMatrix {
         return IntStream.range(0, sideSize).mapToObj(this::getCoordinatesOfColumn).anyMatch(coordinates -> hasPlayerThreeMarksIn(coordinates, player));
     }
 
+    private boolean hasPlayerThreeMarksInAnyRow(Player player) {
+        return IntStream.range(0, sideSize).mapToObj(this::getCoordinatesOfRow).anyMatch(coordinates -> hasPlayerThreeMarksIn(coordinates, player));
+    }
+
     private Collection<Coordinate> getCoordinatesOfColumn(int columnNumber) {
         return IntStream.range(0, sideSize).mapToObj(i -> Coordinate.of(columnNumber, i)).collect(Collectors.toList());
+    }
+
+    private Collection<Coordinate> getCoordinatesOfRow(int rowNumber) {
+        return IntStream.range(0, sideSize).mapToObj(i -> Coordinate.of(i, rowNumber)).collect(Collectors.toList());
     }
 
 }

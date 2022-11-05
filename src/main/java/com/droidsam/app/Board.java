@@ -110,11 +110,7 @@ public class Board {
     }
 
     private boolean hasPlayerPlaceThreeMarksInRow(Player player) {
-        boolean result = false;
-        for (int i = 0; i < size; i++) {
-            result |= hasPlayerThreeMarksIn(this.getCoordinatesOfRow(i), player);
-        }
-        return result;
+        return this.squareMatrix.getRowForPlayer(player).equals(TypeOfSquareRow.VERTICALLY);
     }
 
     private boolean hasPlayerPlaceThreeMarksInColumn(Player player) {
