@@ -1,5 +1,6 @@
 package com.droidsam.app.board;
 
+import com.droidsam.app.game.ThreeMarksInARowWinningRule;
 import com.droidsam.app.player.Player;
 
 public class Board {
@@ -17,8 +18,8 @@ public class Board {
         return coordinatesMatrix.get(position);
     }
 
-    public ThreeMarksInARowStatus getPlayerThreeMarksInARow(Player player) {
-        return coordinatesMatrix.getThreeMarksInARowFor(player);
+    public Player applyWinningRule(ThreeMarksInARowWinningRule ruleToWin) {
+        return ruleToWin.getWinner(this.coordinatesMatrix);
     }
 
     public BoardStatus getFillingStatus() {

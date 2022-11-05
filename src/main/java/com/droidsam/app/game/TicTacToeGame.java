@@ -5,10 +5,8 @@ import com.droidsam.app.board.Coordinate;
 import com.droidsam.app.player.Player;
 
 import java.security.InvalidParameterException;
-import java.util.stream.Stream;
 
 import static com.droidsam.app.board.BoardStatus.FULL;
-import static com.droidsam.app.board.ThreeMarksInARowStatus.NONE;
 import static com.droidsam.app.player.Player.NO_PLAYER;
 
 public class TicTacToeGame {
@@ -52,7 +50,7 @@ public class TicTacToeGame {
     }
 
     public Player getWinner() {
-        return Stream.of(Player.O, Player.X).filter(player -> !this.board.getPlayerThreeMarksInARow(player).equals(NONE)).findFirst().orElse(NO_PLAYER);
+        return board.applyWinningRule(new ThreeMarksInARowWinningRule(3));
     }
 
     public GameStatus getStatus() {
