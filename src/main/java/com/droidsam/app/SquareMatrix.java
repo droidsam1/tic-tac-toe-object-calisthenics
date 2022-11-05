@@ -20,6 +20,13 @@ public class SquareMatrix {
         squares.put(position, player);
     }
 
+    public MatrixStatus getStatus() {
+        if (this.squares.keySet().size() == sideSize * sideSize) {
+            return MatrixStatus.FULL;
+        }
+        return MatrixStatus.NOT_FULL;
+    }
+
     public Player get(Coordinate position) {
         if (!squares.containsKey(position)) {
             return Player.NO_PLAYER;
@@ -27,23 +34,24 @@ public class SquareMatrix {
         return squares.get(position);
     }
 
-    public TypeOfSquareRow getRowForPlayer(Player player) {
+    public TypeThreeMarksInARow getPlayerThreeMarksInARow(Player player) {
+
         if (hasPlayerThreeMarksIn(getCoordinatesOfMainDiagonal(), player)) {
-            return TypeOfSquareRow.DIAGONALLY;
+            return TypeThreeMarksInARow.DIAGONALLY;
         }
         if (hasPlayerThreeMarksIn(getCoordinatesOfInverseMainDiagonal(), player)) {
-            return TypeOfSquareRow.DIAGONALLY;
+            return TypeThreeMarksInARow.DIAGONALLY;
         }
 
         if (hasPlayerThreeMarksInAnyColumn(player)) {
-            return TypeOfSquareRow.HORIZONTALLY;
+            return TypeThreeMarksInARow.HORIZONTALLY;
         }
 
         if (hasPlayerThreeMarksInAnyRow(player)) {
-            return TypeOfSquareRow.VERTICALLY;
+            return TypeThreeMarksInARow.VERTICALLY;
         }
 
-        return TypeOfSquareRow.NONE;
+        return TypeThreeMarksInARow.NONE;
 
     }
 

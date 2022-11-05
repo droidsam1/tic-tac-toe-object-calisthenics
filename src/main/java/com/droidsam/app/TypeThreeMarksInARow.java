@@ -1,5 +1,5 @@
 package com.droidsam.app;
 
-public enum TypeOfSquareRow {
+public enum TypeThreeMarksInARow {
     HORIZONTALLY, VERTICALLY, DIAGONALLY, NONE
 }

@@ -1,19 +1,13 @@
 package com.droidsam.app;
 
-import java.util.HashMap;
-import java.util.Map;
-
+import static com.droidsam.app.MatrixStatus.FULL;
 import static com.droidsam.app.Player.NO_PLAYER;
+import static com.droidsam.app.TypeThreeMarksInARow.NONE;
 
 public class Board {
-
-    private final Map<Coordinate, Player> squares;
     private final SquareMatrix squareMatrix;
-    private final int size;
 
     public Board() {
-        this.size = 3;
-        this.squares = new HashMap<>(getFullSize(size));
         this.squareMatrix = new SquareMatrix(3);
     }
 
@@ -22,8 +16,6 @@ public class Board {
         if (status != GameStatus.ONGOING) {
             return;
         }
-
-        squares.put(position, player);
         squareMatrix.put(position, player);
     }
 
@@ -41,24 +33,16 @@ public class Board {
         return squareMatrix.get(position);
     }
 
-    private boolean isFull() {
-        return this.squares.values().stream().filter(p -> !p.equals(NO_PLAYER)).count() == getFullSize(size);
-    }
-
-    private int getFullSize(int size) {
-        return size * size;
-    }
-
     private boolean isDraw() {
-        return this.isFull() && NO_PLAYER.equals(this.getWinner());
+        return FULL.equals(this.squareMatrix.getStatus()) && NO_PLAYER.equals(this.getWinner());
     }
 
     public Player getWinner() {
 
-        if (!this.squareMatrix.getRowForPlayer(Player.X).equals(TypeOfSquareRow.NONE)) {
+        if (!this.squareMatrix.getPlayerThreeMarksInARow(Player.X).equals(NONE)) {
             return Player.X;
         }
-        if (!this.squareMatrix.getRowForPlayer(Player.O).equals(TypeOfSquareRow.NONE)) {
+        if (!this.squareMatrix.getPlayerThreeMarksInARow(Player.O).equals(NONE)) {
             return Player.O;
         }
 
