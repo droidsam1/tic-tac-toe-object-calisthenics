@@ -1,5 +1,9 @@
 package com.droidsam.app;
 
+import com.droidsam.app.board.Coordinate;
+import com.droidsam.app.game.GameStatus;
+import com.droidsam.app.game.TicTacToeGame;
+import com.droidsam.app.player.Player;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

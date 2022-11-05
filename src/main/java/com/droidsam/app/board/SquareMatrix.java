@@ -1,4 +1,6 @@
-package com.droidsam.app;
+package com.droidsam.app.board;
+
+import com.droidsam.app.player.Player;
 
 import java.util.Collection;
 import java.util.HashMap;

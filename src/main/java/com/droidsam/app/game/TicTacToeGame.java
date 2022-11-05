@@ -1,11 +1,15 @@
-package com.droidsam.app;
+package com.droidsam.app.game;
+
+import com.droidsam.app.board.Board;
+import com.droidsam.app.board.Coordinate;
+import com.droidsam.app.player.Player;
 
 import java.security.InvalidParameterException;
 import java.util.stream.Stream;
 
-import static com.droidsam.app.MatrixStatus.FULL;
-import static com.droidsam.app.Player.NO_PLAYER;
-import static com.droidsam.app.TypeThreeMarksInARow.NONE;
+import static com.droidsam.app.board.MatrixStatus.FULL;
+import static com.droidsam.app.board.TypeThreeMarksInARow.NONE;
+import static com.droidsam.app.player.Player.NO_PLAYER;
 
 public class TicTacToeGame {
 

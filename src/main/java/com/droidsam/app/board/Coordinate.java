@@ -1,4 +1,4 @@
-package com.droidsam.app;
+package com.droidsam.app.board;
 
 import java.util.Objects;
 

@@ -1,4 +1,4 @@
-package com.droidsam.app;
+package com.droidsam.app.game;
 
 public enum GameStatus {
 
