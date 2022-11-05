@@ -7,8 +7,8 @@ import com.droidsam.app.player.Player;
 import java.security.InvalidParameterException;
 import java.util.stream.Stream;
 
-import static com.droidsam.app.board.MatrixStatus.FULL;
-import static com.droidsam.app.board.TypeThreeMarksInARow.NONE;
+import static com.droidsam.app.board.BoardStatus.FULL;
+import static com.droidsam.app.board.ThreeMarksInARowStatus.NONE;
 import static com.droidsam.app.player.Player.NO_PLAYER;
 
 public class TicTacToeGame {

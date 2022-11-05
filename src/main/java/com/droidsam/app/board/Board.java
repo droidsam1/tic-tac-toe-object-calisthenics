@@ -3,25 +3,28 @@ package com.droidsam.app.board;
 import com.droidsam.app.player.Player;
 
 public class Board {
-    private final SquareMatrix squareMatrix;
+    private final CoordinatesMatrix coordinatesMatrix;
 
     public Board() {
-        this.squareMatrix = new SquareMatrix(3);
+        this.coordinatesMatrix = new CoordinatesMatrix(3);
     }
 
     public void place(Player player, Coordinate position) {
-        squareMatrix.put(position, player);
+        coordinatesMatrix.put(position, player);
     }
 
     public Player getPlayerAt(Coordinate position) {
-        return squareMatrix.get(position);
+        return coordinatesMatrix.get(position);
     }
 
-    public TypeThreeMarksInARow getPlayerThreeMarksInARow(Player player) {
-        return squareMatrix.getPlayerThreeMarksInARow(player);
+    public ThreeMarksInARowStatus getPlayerThreeMarksInARow(Player player) {
+        return coordinatesMatrix.getThreeMarksInARowFor(player);
     }
 
-    public MatrixStatus getFillingStatus() {
-        return squareMatrix.getFillingStatus();
+    public BoardStatus getFillingStatus() {
+        if (coordinatesMatrix.getFillingStatus().equals(MatrixStatus.FULL)) {
+            return BoardStatus.FULL;
+        }
+        return BoardStatus.NOT_FULL;
     }
 }

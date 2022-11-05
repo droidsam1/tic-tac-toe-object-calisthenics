@@ -8,12 +8,12 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class SquareMatrix {
+public class CoordinatesMatrix {
 
     private final Map<Coordinate, Player> squares;
     private final int sideSize;
 
-    public SquareMatrix(int sideSize) {
+    public CoordinatesMatrix(int sideSize) {
         this.sideSize = sideSize;
         squares = new HashMap<>(sideSize * sideSize);
     }
@@ -36,25 +36,12 @@ public class SquareMatrix {
         return squares.get(position);
     }
 
-    public TypeThreeMarksInARow getPlayerThreeMarksInARow(Player player) {
-
-        if (hasPlayerThreeMarksIn(getCoordinatesOfMainDiagonal(), player)) {
-            return TypeThreeMarksInARow.DIAGONALLY;
-        }
-        if (hasPlayerThreeMarksIn(getCoordinatesOfInverseMainDiagonal(), player)) {
-            return TypeThreeMarksInARow.DIAGONALLY;
+    public ThreeMarksInARowStatus getThreeMarksInARowFor(Player player) {
+        if (hasPlayerThreeMarksInAnyDiagonal(player) || hasPlayerThreeMarksInAnyColumn(player) || hasPlayerThreeMarksInAnyRow(player)) {
+            return ThreeMarksInARowStatus.HAS_THREE_MARKS_IN_A_ROW;
         }
 
-        if (hasPlayerThreeMarksInAnyColumn(player)) {
-            return TypeThreeMarksInARow.HORIZONTALLY;
-        }
-
-        if (hasPlayerThreeMarksInAnyRow(player)) {
-            return TypeThreeMarksInARow.VERTICALLY;
-        }
-
-        return TypeThreeMarksInARow.NONE;
-
+        return ThreeMarksInARowStatus.NONE;
     }
 
     private Collection<Coordinate> getCoordinatesOfMainDiagonal() {
@@ -68,6 +55,11 @@ public class SquareMatrix {
     private boolean hasPlayerThreeMarksIn(Collection<Coordinate> positions, Player player) {
         return positions.stream().filter(c -> this.get(c).equals(player)).count() == 3;
     }
+
+    private boolean hasPlayerThreeMarksInAnyDiagonal(Player player) {
+        return hasPlayerThreeMarksIn(this.getCoordinatesOfMainDiagonal(), player) || hasPlayerThreeMarksIn(this.getCoordinatesOfInverseMainDiagonal(), player);
+    }
+
 
     private boolean hasPlayerThreeMarksInAnyColumn(Player player) {
         return IntStream.range(0, sideSize).mapToObj(this::getCoordinatesOfColumn).anyMatch(coordinates -> hasPlayerThreeMarksIn(coordinates, player));
