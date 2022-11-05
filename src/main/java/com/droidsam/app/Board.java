@@ -1,7 +1,5 @@
 package com.droidsam.app;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -40,48 +38,7 @@ public class Board {
     }
 
     public Player getPlayerAt(Coordinate position) {
-        if (!squares.containsKey(position)) {
-            return Player.NO_PLAYER;
-        }
-//        return squares.get(position);
         return squareMatrix.get(position);
-
-    }
-
-    private Collection<Coordinate> getCoordinatesOfRow(int rowNumber) {
-        Collection<Coordinate> coordinates = new ArrayList<>();
-        for (int i = 0; i < size; i++) {
-            coordinates.add(Coordinate.of(i, rowNumber));
-        }
-        return coordinates;
-    }
-
-    private Collection<Coordinate> getCoordinatesOfColumn(int columnNumber) {
-        Collection<Coordinate> coordinates = new ArrayList<>();
-        for (int i = 0; i < size; i++) {
-            coordinates.add(Coordinate.of(columnNumber, i));
-        }
-        return coordinates;
-    }
-
-    private Collection<Coordinate> getCoordinatesOfMainDiagonal() {
-        Collection<Coordinate> coordinates = new ArrayList<>();
-        for (int i = 0; i < size; i++) {
-            coordinates.add(Coordinate.of(i, i));
-        }
-        return coordinates;
-    }
-
-    private Collection<Coordinate> getCoordinatesOfInverseMainDiagonal() {
-        Collection<Coordinate> coordinates = new ArrayList<>();
-        for (int i = 0; i < size; i++) {
-            coordinates.add(Coordinate.of(i, 2 - i));
-        }
-        return coordinates;
-    }
-
-    private boolean hasPlayerThreeMarksIn(Collection<Coordinate> positions, Player player) {
-        return positions.stream().filter(c -> this.getPlayerAt(c).equals(player)).count() == size;
     }
 
     private boolean isFull() {
@@ -98,27 +55,14 @@ public class Board {
 
     public Player getWinner() {
 
-        if (hasPlayerPlaceThreeMarksInColumn(Player.X) || hasPlayerPlaceThreeMarksInRow(Player.X) || hasPlayerPlaceThreeMarksInDiagonal(Player.X)) {
+        if (!this.squareMatrix.getRowForPlayer(Player.X).equals(TypeOfSquareRow.NONE)) {
             return Player.X;
         }
-
-        if (hasPlayerPlaceThreeMarksInColumn(Player.O) || hasPlayerPlaceThreeMarksInRow(Player.O) || hasPlayerPlaceThreeMarksInDiagonal(Player.O)) {
+        if (!this.squareMatrix.getRowForPlayer(Player.O).equals(TypeOfSquareRow.NONE)) {
             return Player.O;
         }
 
         return NO_PLAYER;
-    }
-
-    private boolean hasPlayerPlaceThreeMarksInRow(Player player) {
-        return this.squareMatrix.getRowForPlayer(player).equals(TypeOfSquareRow.VERTICALLY);
-    }
-
-    private boolean hasPlayerPlaceThreeMarksInColumn(Player player) {
-        return this.squareMatrix.getRowForPlayer(player).equals(TypeOfSquareRow.HORIZONTALLY);
-    }
-
-    private boolean hasPlayerPlaceThreeMarksInDiagonal(Player player) {
-        return this.squareMatrix.getRowForPlayer(player).equals(TypeOfSquareRow.DIAGONALLY);
     }
 
 }
