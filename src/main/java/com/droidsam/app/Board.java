@@ -34,7 +34,7 @@ public class Board {
     }
 
     private boolean isDraw() {
-        return FULL.equals(this.squareMatrix.getStatus()) && NO_PLAYER.equals(this.getWinner());
+        return FULL.equals(this.squareMatrix.getFillingStatus()) && NO_PLAYER.equals(this.getWinner());
     }
 
     public Player getWinner() {

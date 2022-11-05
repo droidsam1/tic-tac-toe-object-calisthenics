@@ -20,7 +20,7 @@ public class SquareMatrix {
         squares.put(position, player);
     }
 
-    public MatrixStatus getStatus() {
+    public MatrixStatus getFillingStatus() {
         if (this.squares.keySet().size() == sideSize * sideSize) {
             return MatrixStatus.FULL;
         }
@@ -64,7 +64,7 @@ public class SquareMatrix {
     }
 
     private boolean hasPlayerThreeMarksIn(Collection<Coordinate> positions, Player player) {
-        return positions.stream().filter(c -> this.get(c).equals(player)).count() == sideSize;
+        return positions.stream().filter(c -> this.get(c).equals(player)).count() == 3;
     }
 
     private boolean hasPlayerThreeMarksInAnyColumn(Player player) {
