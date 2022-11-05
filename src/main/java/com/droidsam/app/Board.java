@@ -10,12 +10,13 @@ import static com.droidsam.app.Player.NO_PLAYER;
 public class Board {
 
     private final Map<Coordinate, Player> squares;
+    private final SquareMatrix squareMatrix;
     private final int size;
-
 
     public Board() {
         this.size = 3;
         this.squares = new HashMap<>(getFullSize(size));
+        this.squareMatrix = new SquareMatrix(3);
     }
 
     public void place(Player player, Coordinate position) {
@@ -25,6 +26,7 @@ public class Board {
         }
 
         squares.put(position, player);
+        squareMatrix.put(position, player);
     }
 
     public GameStatus getStatus() {
@@ -41,7 +43,9 @@ public class Board {
         if (!squares.containsKey(position)) {
             return Player.NO_PLAYER;
         }
-        return squares.get(position);
+//        return squares.get(position);
+        return squareMatrix.get(position);
+
     }
 
     private Collection<Coordinate> getCoordinatesOfRow(int rowNumber) {
@@ -122,7 +126,7 @@ public class Board {
     }
 
     private boolean hasPlayerPlaceThreeMarksInDiagonal(Player player) {
-        return hasPlayerThreeMarksIn(this.getCoordinatesOfMainDiagonal(), player) || hasPlayerThreeMarksIn(this.getCoordinatesOfInverseMainDiagonal(), player);
+        return this.squareMatrix.getRowForPlayer(player).equals(TypeOfSquareRow.DIAGONALLY);
     }
 
 }
