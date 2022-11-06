@@ -4,12 +4,17 @@ import java.util.Objects;
 
 public class Coordinate {
 
-    private final int x;
-    private final int y;
+    protected final int x;
+    protected final int y;
 
     private Coordinate(int x, int y) {
         this.x = x;
         this.y = y;
+    }
+
+    protected Coordinate(Coordinate coordinate) {
+        this.x = coordinate.x;
+        this.y = coordinate.y;
     }
 
     public static Coordinate of(int x, int y) {

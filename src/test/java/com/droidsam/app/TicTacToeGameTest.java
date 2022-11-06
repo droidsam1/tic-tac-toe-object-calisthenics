@@ -6,14 +6,22 @@ import com.droidsam.app.game.TicTacToeGame;
 import com.droidsam.app.player.Player;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.security.InvalidParameterException;
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class TicTacToeGameTest {
 
     private TicTacToeGame game;
+
+    private static Stream<Arguments> invalidCoordinates() {
+        return Stream.of(Arguments.of(-1, 1), Arguments.of(3, 1), Arguments.of(1, -1), Arguments.of(1, 3));
+    }
 
     @BeforeEach
     public void setup() {
@@ -153,5 +161,11 @@ public class TicTacToeGameTest {
         assertEquals(Player.NO_PLAYER, game.getWinner());
         assertEquals(GameStatus.DRAW, game.getStatus());
 
+    }
+
+    @ParameterizedTest
+    @MethodSource("invalidCoordinates")
+    public void shouldPlayerPlaceMarksWithinTheLimitsOfTheBoard(int x, int y) {
+        assertThrows(IndexOutOfBoundsException.class, () -> game.place(Player.X, Coordinate.of(x, y)));
     }
 }

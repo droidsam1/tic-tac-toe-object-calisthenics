@@ -5,13 +5,20 @@ import com.droidsam.app.player.Player;
 
 public class Board {
     private final CoordinatesMatrix coordinatesMatrix;
+    private final int boardSize;
 
     public Board() {
-        this.coordinatesMatrix = new CoordinatesMatrix(3);
+        this.boardSize = 3;
+        this.coordinatesMatrix = new CoordinatesMatrix(boardSize);
     }
 
     public void place(Player player, Coordinate position) {
+        enforceBoardLimits(position);
         coordinatesMatrix.put(position, player);
+    }
+
+    private void enforceBoardLimits(Coordinate input) {
+        CoordinateWithinBoardSize.enforceLimits(input, boardSize);
     }
 
     public Player getPlayerAt(Coordinate position) {
